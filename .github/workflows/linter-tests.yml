@@ -31,6 +31,6 @@ jobs:
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
-          destination-branch: "master"
+          destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Awesome PR by ${{ github.actor }}"
