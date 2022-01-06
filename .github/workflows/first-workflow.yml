@@ -1,5 +1,5 @@
 name: first-workflow
-on: [push]
+on: [push, pull_request]
 jobs:
   check-python-version:
     runs-on: ubuntu-latest
@@ -10,3 +10,21 @@ jobs:
           python-version: '3.9'
       - run: |
           python --version
+
+name: Python Linter & Tests
+on: [push, pull_request]
+jobs:
+  check-python-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          cache: 'pipenv'
+      - name: Lint with pylint
+        run: |
+          pipenv run pylint app
+      - name: Test with nose
+        run: |
+          pipenv run nosetests
